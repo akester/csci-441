@@ -12,6 +12,7 @@ dependencies:
         composer/composer: '^2'
     nodejs:
         yarn: '*'
+        nodejs: '^12'
 
 runtime:
     extensions:
