@@ -9,10 +9,9 @@ type: php:7.4
 
 dependencies:
     php:
-        composer/composer: '^2'
+        composer/composer: "^2"
     nodejs:
-        yarn: '*'
-        nodejs: '^12'
+        yarn: "*"
 
 runtime:
     extensions:
@@ -25,6 +24,15 @@ build:
 hooks:
     build: |
         set -e
+
+        unset NPM_CONFIG_PREFIX
+        export NVM_DIR="$PLATFORM_APP_DIR/.nvm"
+
+        # install.sh will automatically install NodeJS based on the presence of $NODE_VERSION
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+        nvm install node
 
         yarn install
         yarn run prod
@@ -45,27 +53,27 @@ disk: 2048
 
 # The mounts that will be performed when the package is deployed.
 mounts:
-  "storage/app/public":
-      source: local
-      source_path: "public"
-  "storage/framework/views":
-      source: local
-      source_path: "views"
-  "storage/framework/sessions":
-      source: local
-      source_path: "sessions"
-  "storage/framework/cache":
-      source: local
-      source_path: "cache"
-  "storage/logs":
-      source: local
-      source_path: "logs"
-  "bootstrap/cache":
-      source: local
-      source_path: "cache"
-  "/.config":
-      source: local
-      source_path: "config"
+    "storage/app/public":
+        source: local
+        source_path: "public"
+    "storage/framework/views":
+        source: local
+        source_path: "views"
+    "storage/framework/sessions":
+        source: local
+        source_path: "sessions"
+    "storage/framework/cache":
+        source: local
+        source_path: "cache"
+    "storage/logs":
+        source: local
+        source_path: "logs"
+    "bootstrap/cache":
+        source: local
+        source_path: "cache"
+    "/.config":
+        source: local
+        source_path: "config"
 
 # The configuration of app when it is exposed to the web.
 web:
@@ -83,16 +91,15 @@ web:
 crons:
     # Run Laravel's scheduler every 5 minutes, which is often as crons can run.
     scheduler:
-        spec: '*/5 * * * *'
-        cmd: 'php artisan schedule:run'
+        spec: "*/5 * * * *"
+        cmd: "php artisan schedule:run"
     # Run Laravel's queue worker task every 9 minutes
     queue:
-        spec: '*/9 * * * *'
+        spec: "*/9 * * * *"
         # Allow the worker to run for up to 5 minutes. That prevents
         # a long-running queue from blocking a deploy for more than 5
         # minutes.
-        cmd: 'php artisan queue:work --max-time=300'
-
+        cmd: "php artisan queue:work --max-time=300"
 # If you have an especially large queue, you may be better off using a worker.
 # If so, comment out the `queue` cron entry and uncomment this instead. Note that
 # Doing so requires a Medium plan or larger.
