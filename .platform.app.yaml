@@ -22,8 +22,12 @@ build:
 hooks:
     build: |
         set -e
+
+        yarn install
+        yarn run prod
     deploy: |
         set -e
+
         php artisan migrate --force
 
 # The relationships of the application with services or other applications.

@@ -22,5 +22,6 @@ bootstrap/cache
 .config
 
 # Built Files
-/public/css/*.css
-/public/js/*.js
+/public/css/*
+/public/js/*
+/public/mix-manifest.json
