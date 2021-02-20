@@ -10,6 +10,8 @@ type: php:7.4
 dependencies:
     php:
         composer/composer: '^2'
+    nodejs:
+        yarn: '*'
 
 runtime:
     extensions:
