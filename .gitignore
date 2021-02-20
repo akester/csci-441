@@ -20,3 +20,7 @@ storage/framework/cache
 storage/logs
 bootstrap/cache
 .config
+
+# Built Files
+/public/css/*.css
+/public/js/*.js
