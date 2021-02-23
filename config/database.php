@@ -31,6 +31,8 @@ if ($config->isValidPlatform() && $config->inRuntime()) {
     $mysql[0]['host'] = $credentials['host'];
     $mysql[0]['port'] = $credentials['port'];
     $mysql[0]['database'] = $credentials['path'];
+
+    dd ($mysql);
 }
 
 return [
