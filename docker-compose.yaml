@@ -1,0 +1,36 @@
+version: '2'
+services:
+  redis:
+    image: 'redis:latest'
+
+  mariadb:
+    image: 'mariadb:latest'
+
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MARIADB_DATABASE: '${DB_DATABASE}'
+      MARIADB_USER: '${DB_USERNAME}'
+      MARIADB_PASSWORD: '${DB_PASSWORD}'
+
+  app:
+    build: .
+
+    user: '${UID}:${GID}'
+
+    ports:
+      - 8080:80
+
+    environment:
+      DB_HOST: 'mariadb'
+      DB_DATABASE: '${DB_DATABASE}'
+      DB_USERNAME: '${DB_USERNAME}'
+      DB_PASSWORD: '${DB_PASSWORD}'
+
+      CACHE_DRIVER: 'redis'
+      REDIS_HOST: 'redis'
+
+      APP_DEBUG: 'true'
+      APP_ENV: local
+
+    volumes:
+      - '.:/var/www/html'
