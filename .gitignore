@@ -22,3 +22,8 @@ bootstrap/cache
 .config
 
 .data/
+
+# Built Assets
+/public/css/
+/public/js/
+/public/mix-manifest.json
