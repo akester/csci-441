@@ -11,6 +11,9 @@ dependencies:
     php:
         composer/composer: '^2'
 
+    nodejs:
+        "yarn": "*"
+
 runtime:
     extensions:
         - redis
@@ -22,6 +25,19 @@ build:
 hooks:
     build: |
         set -e
+
+        # Set up NVM
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+        export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+        nvm install 16
+        nvm use 16
+
+        yarn install
+        yarn run prod
+
     deploy: |
         set -e
         php artisan migrate --force
@@ -88,14 +104,3 @@ crons:
         # minutes.
         cmd: 'php artisan queue:work --max-time=300'
 
-# If you have an especially large queue, you may be better off using a worker.
-# If so, comment out the `queue` cron entry and uncomment this instead. Note that
-# Doing so requires a Medium plan or larger.
-#workers:
-#    queue:
-#        size: S
-#        commands:
-#            # To minimize leakage, the queue worker will stop every hour
-#            # and get restarted automatically.
-#            start: |
-#                php artisan queue:work --max-time=3600
