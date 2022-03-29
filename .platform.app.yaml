@@ -97,11 +97,11 @@ crons:
     scheduler:
         spec: '*/5 * * * *'
         cmd: 'php artisan schedule:run'
-    # Run Laravel's queue worker task every 9 minutes
-    queue:
-        spec: '*/9 * * * *'
-        # Allow the worker to run for up to 5 minutes. That prevents
-        # a long-running queue from blocking a deploy for more than 5
-        # minutes.
-        cmd: 'php artisan queue:work --max-time=300'
+    # # Run Laravel's queue worker task every 9 minutes
+    # queue:
+    #     spec: '*/9 * * * *'
+    #     # Allow the worker to run for up to 5 minutes. That prevents
+    #     # a long-running queue from blocking a deploy for more than 5
+    #     # minutes.
+    #     cmd: 'php artisan queue:work --max-time=300'
 
