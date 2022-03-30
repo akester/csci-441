@@ -30,3 +30,5 @@ bootstrap/cache
 
 # Lando file
 .lando.yml
+
+/.vscode/settings.json
