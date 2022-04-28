@@ -26,6 +26,10 @@ hooks:
     build: |
         set -e
 
+        # Setup PDFTK
+        wget https://gitlab.com/api/v4/projects/5024297/packages/generic/pdftk-java/v3.3.2/pdftk
+        chmod +x pdftk
+
         # Set up NVM
         unset NPM_CONFIG_PREFIX
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
