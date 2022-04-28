@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:api')->post('/document', [Controller::class, 'UploadFile']);
+Route::middleware('auth:api')->get('/document/{id}/metadata', [Controller::class, 'GetMetadata']);
