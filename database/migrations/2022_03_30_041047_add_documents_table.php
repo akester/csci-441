@@ -15,6 +15,7 @@ class AddDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
 
             $table->string('filename');
             $table->string('uuid');
