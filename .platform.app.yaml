@@ -43,6 +43,14 @@ hooks:
         yarn install
         yarn run prod
 
+        # Clean out mounts
+        rm -rfv storage/framework/views/*
+        rm -rfv storage/framework/cache/*
+        rm -rfv storage/framework/logs/*
+        rm -rfv storage/framework/app/*
+        rm -rfv storage/framework/sessions/*
+        rm -rfv bootstrap/cache/*
+
     deploy: |
         set -e
         php artisan migrate --force
