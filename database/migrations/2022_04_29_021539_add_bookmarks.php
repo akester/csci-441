@@ -43,6 +43,6 @@ class AddBookmarks extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('bookmarks');
     }
 }
