@@ -68,6 +68,59 @@ class Document extends Model
             throw new ProcessFailedException($process);
         }
 
-        echo $process->getOutput();
+        $metadataText = $process->getOutput();
+        $metadataArray = explode(PHP_EOL, $metadataText);
+        $bookmarks = [];
+
+        // We do a for loop so we can skip lines once we detect a bookmark.
+        for ($i = 0; $i < count($metadataArray); $i++) {
+            $line = $metadataArray[$i];
+
+            if ($line == "BookmarkBegin") {
+                $bookmark = new Bookmark();
+
+                $hasTitle = false;
+                $hasLevel = false;
+                $hasPage = false;
+
+                for ($j = 1; $j <= 3; $j++) {
+                    $nextLine = $metadataArray[$j + $i];
+
+                    if (substr($nextLine, 0, 13) == 'BookmarkLevel') {
+                        $level = substr($nextLine, 15);
+                        $hasLevel = true;
+                    }
+                    if (substr($nextLine, 0, 13) == 'BookmarkTitle') {
+                        $bookmark->title = substr($nextLine, 15);
+                        $hasTitle = true;
+                    }
+                    if (substr($nextLine, 0, 18) == 'BookmarkPageNumber') {
+                        $bookmark->page_number = substr($nextLine, 20);
+                        $hasPage = true;
+                    }
+                }
+
+                if (!$hasLevel || !$hasPage || !$hasTitle) {
+                    continue;
+                }
+
+                if ($level == 1) {
+                    $bookmarks[] = $bookmark;
+                } else {
+                    // This will recurse down to the level and append the current bookmark
+                    end($bookmarks)->GetLastChildDepth($level - 1)->children[] = $bookmark;
+                }
+            }
+        }
+
+        $metadata =  new Metadata(
+            [
+                'metadata' => $metadataText,
+                'document_id' => $this->id,
+            ]
+        );
+        $metadata->bookmarks = $bookmarks;
+
+        return $metadata;
     }
 }
