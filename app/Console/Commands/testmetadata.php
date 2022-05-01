@@ -38,11 +38,8 @@ class testmetadata extends Command
      */
     public function handle()
     {
-        $document = Document::findOrFail(3);
-        $metadata = $document->GetMetadata();
-
-        $metadata->save();
-        $metadata->SaveBookmarks();
+        $document = Document::findOrFail(4);
+        $document->SaveMetadata();
 
         return 0;
     }

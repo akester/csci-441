@@ -132,6 +132,30 @@ class Document extends Model
     public function SaveMetadata()
     {
         // Rebuild the metadata text file
-        
+        $this->metadata->LoadBookmarks();
+        $newMetadata = $this->metadata->GetMetadata();
+
+        // Create a new file to store our temp metadata
+        $file = tmpfile();
+        $path = stream_get_meta_data($file)['uri'];
+
+        fwrite($file, $newMetadata);
+
+        copy (storage_path('app/' . $this->path), storage_path('app/' . $this->path . '.old'));
+        $process = new Process([
+            base_path() . '/pdftk',
+            storage_path('app/' . $this->path . '.old'), 
+            'update_info_utf8',
+            $path,
+            'output',
+            storage_path('app/' . $this->path)
+        ]);
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
     }
 }

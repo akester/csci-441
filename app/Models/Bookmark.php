@@ -76,10 +76,12 @@ class Bookmark extends Model
 
     public function GetBookmarkText()
     {
+        $level = $this->GetLevel();
+
         return [
             'BookmarkBegin',
             "BookmarkTitle: $this->title",
-            "BookmarkLevel: $this->GetLevel()",
+            "BookmarkLevel: $level",
             "BookmarkPageNumber: $this->page_number",
         ];
     }
@@ -87,13 +89,9 @@ class Bookmark extends Model
     public function GetChildrenBookmarks() {
         $out = array();
 
-        if (empty($this->children)) {
-            return [];
-        }
-
         foreach ($this->children as $child) {
-            $out = array_merge($out, $child->GetBookmarkText);
-            $out = array_merge($child->GetChildrenBookmarks());
+            $out = array_merge($out, $child->GetBookmarkText());
+            $out = array_merge($out, $child->GetChildrenBookmarks());
         }
 
         return $out;

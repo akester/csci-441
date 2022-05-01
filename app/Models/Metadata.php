@@ -68,12 +68,27 @@ class Metadata extends Model
         $currentMetadata = $this->CleanBookmarkMetadata();
 
         $bookmarks = [];
+        $newMetadata = [];
 
         foreach ($this->bookmarks as $bookmark) {
             $bookmarks = array_merge($bookmark->GetBookmarkText());
             $bookmarks = array_merge($bookmarks, $bookmark->GetChildrenBookmarks());
         }
 
-        var_dump($this->bookmarks);
+        foreach ($currentMetadata as $line) {
+            if (substr($line, 0, 13) != 'NumberOfPages') {
+                $newMetadata[] = $line;
+                continue;
+            }
+
+            // Add this line
+            $newMetadata[] = $line;
+            // And add our bookmarks
+            foreach ($bookmarks as $line) {
+                $newMetadata[] = $line;
+            }
+        }
+
+        return implode(PHP_EOL, $newMetadata);
     }
 }
