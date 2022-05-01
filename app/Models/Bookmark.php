@@ -64,10 +64,9 @@ class Bookmark extends Model
     }
 
     public function LoadChildren() {
-        $bookmarks = Bookmark::where('metadata_id', $this->id)
+        $bookmarks = Bookmark::where('metadata_id', $this->metadata_id)
             ->where('parent_id', $this->id)
-            ->get()
-            ->toArray();
+            ->get();
 
         $this->children = $bookmarks;
         foreach ($this->children as $child) {
