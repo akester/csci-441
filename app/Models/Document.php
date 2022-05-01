@@ -33,6 +33,11 @@ class Document extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function metadata()
+    {
+        return $this->hasOne(Metadata::class, 'document_id');
+    }
+
     /**
      * Upload and store a file uploaded from a user
      */
@@ -122,5 +127,11 @@ class Document extends Model
         $metadata->bookmarks = $bookmarks;
 
         return $metadata;
+    }
+
+    public function SaveMetadata()
+    {
+        // Rebuild the metadata text file
+        
     }
 }
