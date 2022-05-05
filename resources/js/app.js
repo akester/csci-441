@@ -1,7 +1,8 @@
 require('./bootstrap');
 
-// import Alpine from 'alpinejs';
+import { createApp } from 'vue'
+import Editor from './components/Editor.vue';
 
-// window.Alpine = Alpine;
-
-// Alpine.start();
+createApp({
+    components: { Editor }
+}).mount('#app')
