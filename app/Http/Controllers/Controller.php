@@ -19,6 +19,16 @@ class Controller extends BaseController
     public function UploadFile() {
         return view('upload');
     }
+
+    public function Editor($id) {
+        $metadata = Document::findOrFail($id)->metadata;
+
+        $metadata->LoadBookmarks();
+
+        return view('editor', [
+            'metadata' => $metadata
+        ]);
+    }
     
     public function UploadFilePost(UploadDocumentRequest $request) {
         $file = $request->file('file');
