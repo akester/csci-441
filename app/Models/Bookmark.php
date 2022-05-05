@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use JsonSerializable;
 
-class Bookmark extends Model
+class Bookmark extends Model implements JsonSerializable
 {
     use HasFactory;
 
@@ -95,5 +96,16 @@ class Bookmark extends Model
         }
 
         return $out;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'page_number' => $this->page_number,
+            'level' => $this->GetLevel(),
+            'parent_id' => $this->parent_id,
+        ];
     }
 }

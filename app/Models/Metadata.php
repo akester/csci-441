@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use JsonSerializable;
 
-class Metadata extends Model
+class Metadata extends Model implements JsonSerializable
 {
     use HasFactory;
 
@@ -18,6 +19,10 @@ class Metadata extends Model
 
     public function document() {
         return $this->belongsTo(Document::class);
+    }
+
+    public function bookmarks_top_level() {
+        return $this->hasMany(Bookmark::class, 'metadata_id');
     }
 
     public function SaveBookmarks() {
@@ -90,5 +95,13 @@ class Metadata extends Model
         }
 
         return implode(PHP_EOL, $newMetadata);
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'bookmarks' => $this->bookmarks_top_level,
+        ];
     }
 }

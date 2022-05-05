@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use JsonSerializable;
 use Ramsey\Uuid\Rfc4122\UuidV4;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
-class Document extends Model
+class Document extends Model implements JsonSerializable
 {
     use HasFactory;
 
@@ -157,5 +158,14 @@ class Document extends Model
             throw new ProcessFailedException($process);
         }
 
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'bookmarks' => $this->bookmarks,
+        ];
     }
 }
