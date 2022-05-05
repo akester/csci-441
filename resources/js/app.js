@@ -5,4 +5,4 @@ import Editor from './components/Editor.vue';
 
 createApp({
     components: { Editor }
-}).mount('#app')
+}).mount('#content')

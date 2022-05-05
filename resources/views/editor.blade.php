@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div id="app">
+    <div id="content">
         <editor></editor>
     </div>
 
