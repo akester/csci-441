@@ -1,1 +1,205 @@
-//
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    height: 100vh;
+}
+
+#container { 
+    background-color:#FFF5CE;
+    height: 90vh;
+    width: 90vw;
+    margin: auto;
+    display: grid;
+    grid-template-areas:
+        'header header header'
+        'empty control login'
+        'editing content side'
+        'footer footer footer';
+    grid-template-columns: 2fr 5fr 1fr;
+    grid-template-rows: 10% 15% 70% 5%;
+
+
+}
+header{
+  color: #fff;
+ /* border: black 1px solid;*/
+}
+
+#empty, #control, #login, #editing, #content, #side, footer{
+    color: #fff;
+    padding: 30px;
+    /* border: black 1px solid; */
+} 
+
+header{
+    grid-area: header;
+    background-color: #FFBF00;
+}
+
+#empty{
+    grid-area: empty;
+    background-color: #FFF5CE;
+}
+
+#control{
+    grid-area: control;
+    background-color:#FFF5CE;
+    /*border: #000;*/
+
+}
+
+#login{
+    grid-area: login;
+    background-color: #FFF5CE;
+
+}
+
+#editing{
+    grid-area: editing;
+    background-color:#FFF5CE;  
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#content{
+   /* margin : 50px; */
+    grid-area: content;
+    background-color:#FFF5CE; 
+
+}
+
+#side{
+    grid-area: side;
+    background-color: #FFF5CE;
+}
+
+footer{
+    grid-area: footer;
+    background-color: #333333;
+}
+
+/* These are the children elements, the inner divs */
+#logo{
+  /*background-image:url("headerPdfToc_small.png");*/
+  background-repeat: no-repeat;
+  background-size: contain;
+
+}
+
+#insideControl{
+
+}
+
+#control-1,#control-2,#login-1,#login-2{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#editingTitle{
+  background-color: #EBEBEB;
+  color:#0f1111;
+  text-align: center;
+  font-weight: bold;
+  /*height: 50px; */
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+#contentChild{
+  background-color: #FFFFFF;  
+  border: black 1px solid;
+  height: 95%;
+  width: 90%;
+  margin: auto;
+
+}
+
+/* CSS Control buttons  and login/register buttons*/
+/****************************************************************/
+.button-12 {
+  display: flex;
+  /*flex-direction: column;  original */
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+  border-radius: 6px;
+  border: none;
+
+  background: #6E6D70;
+  box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+  color: #DFDEDF;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  /* I added this lines - it causes the buttons to be same size */
+  width: 100%;
+  max-width: 150px;
+
+  &:focus {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+    outline: 0;
+  }
+}
+
+/**********************************Editing buttons *******************************/
+
+/* CSS */
+.button-14 {
+  background-image: linear-gradient(#f7f8fa ,#e7e9ec);
+  border-color: #adb1b8 #a2a6ac #8d9096;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  box-shadow: rgba(255,255,255,.6) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember",Arial,sans-serif;
+  font-size: 14px;
+  height: 29px;
+  font-size: 13px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 11px;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  /* I added this lines - it causes the buttons to be same size */
+  width: 100%;
+  max-width: 300px;
+
+  &:active {
+    border-bottom-color: #a2a6ac;
+  }
+
+  &:active:hover {
+    border-bottom-color: #a2a6ac;
+  }
+
+  &:hover {
+    border-color: #a2a6ac #979aa1 #82858a;
+  }
+
+  &:focus {
+    border-color: #e77600;
+    box-shadow: rgba(228, 121, 17, .5) 0 0 3px 2px;
+    outline: 0;
+  }
+}
+

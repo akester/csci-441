@@ -27,6 +27,7 @@ bootstrap/cache
 /public/css/
 /public/js/
 /public/mix-manifest.json
+/public/img/
 
 # Lando file
 .lando.yml
