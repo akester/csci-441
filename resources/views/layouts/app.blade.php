@@ -45,9 +45,7 @@
         </div>
     </div>
 
-    <div id="app">
-        <editor></editor>
-    </div>
+    {{ $slot }}
 
     <!--Right side below Login - There's nothing there yet-->
     <div id="side">Sidebar</div>
