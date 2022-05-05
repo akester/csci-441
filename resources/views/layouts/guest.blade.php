@@ -22,10 +22,10 @@
     <div id="login">
         <div id="ïnsideLogin">
             <div id="login-1">
-                <button class="button-12" role="button">Login</button>
+                <a href="/login"><button class="button-12" role="button">Login</button></a>
             </div>
             <div id="login-1">
-                <button class="button-12" role="button">Register</button>
+                <a href="/register"><button class="button-12" role="button">Register</button></a>
             </div>
         </div>
     </div>

@@ -34,16 +34,7 @@
     </div>
 
     <!--Right below header, right side - holds login/register buttons-->
-    <div id="login">
-        <div id="ïnsideLogin">
-            <div id="login-1">
-                <button class="button-12" role="button">Login</button>
-            </div>
-            <div id="login-1">
-                <button class="button-12" role="button">Register</button>
-            </div>
-        </div>
-    </div>
+    <div id="login"></div>
 
     {{ $slot }}
 
