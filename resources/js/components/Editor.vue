@@ -1,5 +1,5 @@
 <template>
-<!--Left side, below Empty - holds the editing buttons-->
+    <!--Left side, below Empty - holds the editing buttons-->
     <div id="editing"> 
         <div id="editingTitle">Editing Operations</div>
         <button class="button-14" role="button">Insert Line</button>
