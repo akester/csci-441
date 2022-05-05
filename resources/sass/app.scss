@@ -37,6 +37,10 @@ header{
     /* border: black 1px solid; */
 } 
 
+#content {
+  color: #000;
+}
+
 header{
     grid-area: header;
     background-color: #FFBF00;
@@ -203,3 +207,8 @@ footer{
   }
 }
 
+
+.button-block {
+  display: block;
+  margin-top: 1rem;
+}

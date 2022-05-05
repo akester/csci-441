@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,8 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::middleware('auth')->get('/upload', [Controller::class, 'UploadFile']);
+Route::middleware('auth')->post('/upload', [Controller::class, 'UploadFilePost']);
 
 require __DIR__.'/auth.php';

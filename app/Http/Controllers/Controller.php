@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UploadDocumentRequest;
 use App\Models\Document;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -15,16 +16,18 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function UploadFile(Request $request) {
-        $file = $request->file('test');
+    public function UploadFile() {
+        return view('upload');
+    }
+    
+    public function UploadFilePost(UploadDocumentRequest $request) {
+        $file = $request->file('file');
 
         $document = new Document();
-
         $document->owner_id = auth()->user()->id;
-
         $document->Upload($file);
 
-        var_dump($document);
+        return redirect('/dashboard');
     }
 
     public function GetMetadata($id, Request $request) {
