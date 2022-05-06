@@ -35,20 +35,21 @@ class Metadata extends Model implements JsonSerializable
     }
 
     public function SaveBookmarksArray() {
-        $lastLevel = 1;
+        $parents = [];
         $lastBookmark = null;
 
         foreach ($this->bookmarks as $bookmark) {
             $bookmarkObj = new Bookmark($bookmark);
 
-            if ($bookmark['level'] > $lastLevel && !is_null($lastBookmark)) {
-                $bookmarkObj->parent_id = $lastBookmark->id;
+            if ($bookmark['level'] > 1 && !is_null($lastBookmark)) {
+                // Look for a parent for one level up
+                $bookmarkObj->parent_id = $parents[$bookmark['level'] - 1]->id;
             }
             $bookmarkObj->metadata_id = $this->id;
 
             $bookmarkObj->save();
             $lastBookmark = $bookmarkObj;
-            $lastLevel = $bookmark['level'];
+            $parents[$bookmark['level']] = $bookmarkObj;
         }
     }
 
