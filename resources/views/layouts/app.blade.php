@@ -15,27 +15,6 @@
     <!--Left side right below header - nothing on it at the moment-->
     <div id="empty">Empty</div>
 
-    <!--Righ below header in the center, it holds the control buttons-->
-    <div id="control">
-        <div id="insideControl">
-            <div id="control-1">
-                <button class="button-12" role="button">Upload pdf</button>
-                <button class="button-12" role="button">Download pdf</button>
-                <button class="button-12" role="button">Upload TOC</button>
-                <button class="button-12" role="button">Download TOC</button>
-            </div>
-            <div id="control-2">
-                <button class="button-12" role="button">Extract TOC</button>
-                <button class="button-12" role="button">Insert TOC</button>
-                <button class="button-12" role="button">Save</button>
-                <button class="button-12" role="button">Help</button>
-            </div>>
-        </div>
-    </div>
-
-    <!--Right below header, right side - holds login/register buttons-->
-    <div id="login"></div>
-
     {{ $slot }}
 
     <!--Right side below Login - There's nothing there yet-->

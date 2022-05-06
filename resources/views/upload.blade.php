@@ -1,4 +1,12 @@
 <x-app-layout>
+    <!--Righ below header in the center, it holds the control buttons-->
+    <div id="control">
+        <div id="insideControl"></div>
+    </div>
+
+    <!--Right below header, right side - holds login/register buttons-->
+    <div id="login"></div>
+
     <div id="content">
         Please select a PDF document to upload.
 
