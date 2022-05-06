@@ -11,7 +11,6 @@ class Bookmark extends Model implements JsonSerializable
     use HasFactory;
 
     protected $fillable = [
-        'parent_id',
         'metadata_id',
         'title',
         'page_number',

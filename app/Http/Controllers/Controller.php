@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveMetadata;
 use App\Http\Requests\UploadDocumentRequest;
+use App\Models\Bookmark;
 use App\Models\Document;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -11,6 +12,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class Controller extends BaseController
@@ -37,8 +39,9 @@ class Controller extends BaseController
     {
         $metadata = Document::findOrFail($id)->metadata;
 
+        DB::table('bookmarks')->where('metadata_id', $metadata->id)->delete();
         $metadata->bookmarks = $request->bookmarks;
-        $metadata->SaveBookmarks();
+        $metadata->SaveBookmarksArray();
 
         return new JsonResponse(['message' => 'save ok']);
     }

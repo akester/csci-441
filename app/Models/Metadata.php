@@ -34,6 +34,24 @@ class Metadata extends Model implements JsonSerializable
         }
     }
 
+    public function SaveBookmarksArray() {
+        $lastLevel = 1;
+        $lastBookmark = null;
+
+        foreach ($this->bookmarks as $bookmark) {
+            $bookmarkObj = new Bookmark($bookmark);
+
+            if ($bookmark['level'] > $lastLevel && !is_null($lastBookmark)) {
+                $bookmarkObj->parent_id = $lastBookmark->id;
+            }
+            $bookmarkObj->metadata_id = $this->id;
+
+            $bookmarkObj->save();
+            $lastBookmark = $bookmarkObj;
+            $lastLevel = $bookmark['level'];
+        }
+    }
+
     public function LoadBookmarks() {
         $bookmarks = Bookmark::where('metadata_id', $this->id)
             ->whereNull('parent_id')
