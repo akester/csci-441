@@ -18,14 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware('auth')->get('/dashboard', [Controller::class, 'Dashboard']);
 
 Route::middleware('auth')->get('/upload', [Controller::class, 'UploadFile']);
 Route::middleware('auth')->post('/upload', [Controller::class, 'UploadFilePost']);
 
 Route::middleware('auth')->get('/editor/{id}', [Controller::class, 'Editor']);
 Route::middleware('auth')->post('/editor/{id}', [Controller::class, 'EditorSave']);
+
+Route::middleware('auth')->get('/download/{id}', [Controller::class, 'DownloadFile']);
 
 require __DIR__.'/auth.php';

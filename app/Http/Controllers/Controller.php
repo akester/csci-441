@@ -19,6 +19,16 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function Dashboard() {
+        $id = auth()->user()->id;
+
+        $documents = Document::where('owner_id', '=', $id)->get();
+
+        return view('dashboard', [
+            'documents' => $documents,
+        ]);
+    }
+
     public function UploadFile()
     {
         return view('upload');
@@ -54,7 +64,21 @@ class Controller extends BaseController
         $document->owner_id = auth()->user()->id;
         $document->Upload($file);
 
+        // Get the metadata for the file
+        $metadata = $document->GetMetadata();
+        $metadata->save();
+        $metadata->SaveBookmarks();
+
         return redirect('/dashboard');
+    }
+
+    public function DownloadFile($id) {
+        $document = Document::findOrFail($id);
+
+        // Update the metadata in the file
+        $document->SaveMetadata();
+
+        return $document->Download();
     }
 
     public function GetMetadata($id, Request $request)
