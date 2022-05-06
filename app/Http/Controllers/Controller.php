@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveMetadata;
 use App\Http\Requests\UploadDocumentRequest;
 use App\Models\Document;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -16,11 +17,13 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function UploadFile() {
+    public function UploadFile()
+    {
         return view('upload');
     }
 
-    public function Editor($id) {
+    public function Editor($id)
+    {
         $metadata = Document::findOrFail($id)->metadata;
 
         $metadata->LoadBookmarks();
@@ -29,8 +32,19 @@ class Controller extends BaseController
             'metadata' => $metadata
         ]);
     }
-    
-    public function UploadFilePost(UploadDocumentRequest $request) {
+
+    public function EditorSave($id, SaveMetadata $request)
+    {
+        $metadata = Document::findOrFail($id)->metadata;
+
+        $metadata->bookmarks = $request->bookmarks;
+        $metadata->SaveBookmarks();
+
+        return new JsonResponse(['message' => 'save ok']);
+    }
+
+    public function UploadFilePost(UploadDocumentRequest $request)
+    {
         $file = $request->file('file');
 
         $document = new Document();
@@ -40,7 +54,8 @@ class Controller extends BaseController
         return redirect('/dashboard');
     }
 
-    public function GetMetadata($id, Request $request) {
+    public function GetMetadata($id, Request $request)
+    {
         $document = Document::findOrFail($id);
 
         try {

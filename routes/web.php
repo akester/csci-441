@@ -26,5 +26,6 @@ Route::middleware('auth')->get('/upload', [Controller::class, 'UploadFile']);
 Route::middleware('auth')->post('/upload', [Controller::class, 'UploadFilePost']);
 
 Route::middleware('auth')->get('/editor/{id}', [Controller::class, 'Editor']);
+Route::middleware('auth')->post('/editor/{id}', [Controller::class, 'EditorSave']);
 
 require __DIR__.'/auth.php';
