@@ -7,7 +7,7 @@
                     <a href="/upload">Upload pdf</a>
                 </button>
                 <button class="button-12" role="button">
-                    <a href="/download/{{ $metadata->document_id }}">Download pdf</a>
+                    <a target="_blank" href="/download/{{ $metadata->document_id }}">Download pdf</a>
                 </button>
                 <button class="button-12" role="button">Upload TOC</button>
                 <button class="button-12" role="button">Download TOC</button>
