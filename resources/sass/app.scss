@@ -218,10 +218,53 @@ footer{
   box-sizing: border-box;
   border: 1px solid #333333;
   border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
 
   & td {
     border: 1px solid #333;
     padding: 0.5rem 1rem;
     box-sizing: border-box;
+    width: 15%;
+
+    &.title {
+      width: 60%;
+    }
+
+    $levelpadding: 1rem;
+    @for $i from 1 through 10 {
+      &.level-#{$i} {
+        padding-left: $i * $levelpadding;
+      }
+    }
+  }
+
+  button {
+    background-size: contain;
+    background-position: center center;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-style: none;
+    background-color: transparent;
+    margin: 0 0.25rem;
+
+    &.promote {
+      background-image: url('/img/indent-decrease.png');
+    }
+
+    &.demote {
+      background-image: url('/img/indent-increase.png');
+    }
+
+    &.delete {
+      background-image: url('/img/bin.png');
+    }
+  }
+
+  & input {
+    display: block;
+    width: 100%;
+    padding: 0.25rem;
   }
 }

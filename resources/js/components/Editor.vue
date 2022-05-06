@@ -3,10 +3,13 @@
     <div id="editor">
         <div id="contentChild">
             <table id="editor-table">
-                <tr v-for="bookmark in bookmarks" :key="bookmark.id">
-                    <td>{{ bookmark.level }}</td>
-                    <td>{{ bookmark.title }}</td>
-                    <td>Actions</td>
+                <tr v-for="(bookmark,index) in bookmarks" :key="bookmark.id">
+                    <td :class="['title', 'level-' + bookmark.level]"><input type="text" v-model="bookmark.title" /></td>
+                    <td>
+                        <button @click="bookmark.level--" class="promote"></button>
+                        <button @click="bookmark.level++" class="demote"></button>
+                        <button @click="bookmarks.splice(index, 1)" class="delete"></button>
+                    </td>
                 </tr>
             </table>
         </div>
